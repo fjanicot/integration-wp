@@ -477,7 +477,7 @@ big {
 /* Elements
 --------------------------------------------- */
 body {
-	background: #fff;
+	background: var(--light);
 }
 
 hr {

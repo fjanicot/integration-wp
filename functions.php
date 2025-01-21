@@ -157,6 +157,13 @@ function home_enqueue_styles() {
 
 add_action('wp_enqueue_scripts', 'home_enqueue_styles');
 
+add_action('wp_enqueue_scripts', function () {
+    if (is_singular('parc')) {
+        wp_enqueue_style('single-cpt-style', get_template_directory_uri() . '/css/single-cpt.css');
+    }
+});
+
+
 /**
  * Implement the Custom Header feature.
  */
@@ -184,3 +191,30 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+// Hide description field on "Pays" taxonomy
+function my_admin_area_custom_css() {
+    echo '<style>
+			.form-field.term-description-wrap {
+				display:none;
+			}
+		</style>';
+}
+add_action('admin_head', 'my_admin_area_custom_css');
+
+// Display "Code pays" on "Pays" taxonomy page
+add_filter('manage_edit-pays_columns', function ($columns) {
+    $columns['code_pays'] = 'Code pays';
+    return $columns;
+});
+add_action('manage_pays_custom_column', function ($content, $column_name, $term_id) {
+    if ($column_name === 'code_pays') {
+        // Récupérer la valeur du champ personnalisé "Code pays"
+        $code_pays = get_term_meta($term_id, 'code_pays', true);
+        if ($code_pays) {
+            $content = esc_html($code_pays);
+        } else {
+            $content = '—';
+        }
+    }
+    return $content;
+}, 10, 3);
