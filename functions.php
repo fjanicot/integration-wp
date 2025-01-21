@@ -149,6 +149,14 @@ function coasters_eu_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'coasters_eu_scripts' );
 
+function home_enqueue_styles() {
+    if(is_front_page()) {
+        wp_enqueue_style('home', get_stylesheet_directory_uri() . '/css/home.css');
+    }
+}
+
+add_action('wp_enqueue_scripts', 'home_enqueue_styles');
+
 /**
  * Implement the Custom Header feature.
  */
