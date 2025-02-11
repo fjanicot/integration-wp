@@ -158,7 +158,7 @@ function home_enqueue_styles() {
 add_action('wp_enqueue_scripts', 'home_enqueue_styles');
 
 add_action('wp_enqueue_scripts', function () {
-    if (is_singular('parc')) {
+    if (is_singular('parc') || is_singular('coaster')) {
         wp_enqueue_style('single-cpt-style', get_template_directory_uri() . '/css/single-cpt.css');
     }
 });
