@@ -1,4 +1,7 @@
-@import "variables.css";
 @import "components/card.css";
 @import "components/hero.css";
+
+main {
+    margin: auto;
+}
 
