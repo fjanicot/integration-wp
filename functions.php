@@ -163,6 +163,12 @@ add_action('wp_enqueue_scripts', function () {
     }
 });
 
+add_action('wp_enqueue_scripts', function () {
+    if (is_singular('coaster')) {
+        wp_enqueue_style('single-coaster-style', get_template_directory_uri() . '/css/single-coaster.css');
+    }
+});
+
 
 /**
  * Implement the Custom Header feature.
